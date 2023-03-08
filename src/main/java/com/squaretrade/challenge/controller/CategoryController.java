@@ -1,7 +1,7 @@
 package com.squaretrade.challenge.controller;
 
 import com.squaretrade.challenge.dto.KeywordDto;
-import com.squaretrade.challenge.exception.InvalidCategoryNameException;
+import com.squaretrade.challenge.exception.CategoryNotFoundException;
 import com.squaretrade.challenge.response.GetKeywordsResponse;
 import com.squaretrade.challenge.response.GetLevelResponse;
 import com.squaretrade.challenge.service.CategoryService;
@@ -28,18 +28,13 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/")
-    public ResponseEntity<GetLevelResponse> getLevel(@RequestParam final String categoryName) {
-        // TODO: Add validator Framework
-        if(StringUtils.isEmpty(categoryName)) {
-            throw new InvalidCategoryNameException("Category name must not be blank");
-        }
-
-        final int level = categoryService.getLevel(categoryName);
+    @GetMapping("/{categoryId}/level")
+    public ResponseEntity<GetLevelResponse> getLevel(@PathVariable final int categoryId) {
+        final int level = categoryService.getLevel(categoryId);
 
         return ResponseEntity.ok(GetLevelResponse.builder()
                 .level(level)
-                .categoryName(categoryName)
+                .categoryId(categoryId)
                 .build());
     }
 

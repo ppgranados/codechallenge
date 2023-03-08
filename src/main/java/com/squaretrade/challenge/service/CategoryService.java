@@ -9,5 +9,5 @@ public interface CategoryService {
 
     List<KeywordDto> getKeywordsFromCategory(int id);
 
-    int getLevel(String categoryName);
+    int getLevel(int id);
 }

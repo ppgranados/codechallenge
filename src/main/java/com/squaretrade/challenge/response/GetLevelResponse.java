@@ -10,5 +10,5 @@ import lombok.Data;
 @Builder
 public class GetLevelResponse {
     private int level;
-    private String categoryName;
+    private int categoryId;
 }
